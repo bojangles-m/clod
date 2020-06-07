@@ -1,4 +1,4 @@
-//  clod v0.1.3
+//  clod v0.1.4
 //  https://github.com/bojangles-m/clod
 //  (c) 2020-2020 Bojan Mazej
 //  License: ISC
