@@ -33,5 +33,13 @@
         "rollup": "^2.13.1",
         "rollup-plugin-terser": "^6.1.0",
         "jest": "^26.0.1"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bojangles-m/clod.git"
+    },
+    "bugs": {
+        "url": "https://github.com/bojangles-m/clod/issues"
+    },
+    "homepage": "https://github.com/bojangles-m/clod#readme"
 }
