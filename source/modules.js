@@ -1,0 +1,90 @@
+/**
+ * Simple Dump function to write on output
+ * Used for development
+ * @param {*} obj printed out
+ * @param {Boolean} _cdump - enable or disable output
+ */
+global._cdump = false;
+global.cdump = function dump(obj) {
+    if (_cdump) console.log(obj);
+};
+
+/**
+ * Checks if the input value is 'null' or 'undefined'.
+ * @param {*} testing value
+ * @return {Boolean} 'true' if 'value' is 'undefined' or 'null', otherwise 'false'.
+ */
+export function isNil(value) {
+    return value == null;
+}
+
+/**
+ * Is a given variable an object?
+ * @param {*} obj - passed any var to make a check
+ * @return {Boolean} 'true' if param is Object, otherwise 'false'.
+ */
+export function isObject(obj) {
+    return (typeof obj === 'function' || paramTester('Object')(obj)) && !!obj;
+}
+
+/**
+ * For a given array, string, or object we check if it is Empty.
+ * An "empty" object has no enumerable own-properties.
+ * @param {*} obj - param to be teste for
+ * @return {Boolean} 'true' if param is Empty, otherwise 'false'.
+ */
+export function isEmpty(obj) {
+    if (obj == null) return true;
+
+    if (isArray(obj) || isString(obj) || isArguments(obj)) return obj.length === 0;
+
+    return Object.keys(obj).length === 0;
+}
+
+/**
+ * Internal function for string based Type testing.
+ * @param {String} name - Type of the param
+ * @returns {Boolean} 'true' if param is the Type passed to the function, otherwise 'false'.
+ */
+function paramTester(name) {
+    return function (obj) {
+        return toString.call(obj) === `[object ${name}]`;
+    };
+}
+
+/**
+ * Add some isType methods.
+ */
+export var isArguments = paramTester('Arguments');
+export var isString = paramTester('String');
+export var isModule = paramTester('Module');
+export var isFunction = paramTester('Function');
+export var isRegExp = paramTester('RegExp');
+export var isNumber = paramTester('Number');
+export var isNull = paramTester('Null');
+export var isBoolean = paramTester('Boolean');
+export var isDate = paramTester('Date');
+export var isUndefined = paramTester('Undefined');
+export var isArray = Array.isArray;
+
+/**
+ * Return first key of the Object
+ * @param {Object} obj - get the first key
+ * @return {String} - Returns first property of the object, otherwise undefined
+ */
+export function first(obj) {
+    if (!isObject(obj) || isEmpty(obj)) return undefined;
+
+    return Object.keys(obj)[0];
+}
+
+/**
+ * Return Array of Object properties
+ * @param {Object} obj - to get all properties from
+ * @returns {Array} - array of Object properties
+ */
+export function keys(obj) {
+    if (!isObject(obj)) return [];
+
+    return Object.keys(obj);
+}
