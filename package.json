@@ -1,6 +1,6 @@
 {
     "name": "clod",
-    "version": "0.1.5",
+    "version": "0.2.0",
     "description": "Utility library for JavaScript with basic functions.",
     "main": "clod.js",
     "module": "clod.js",
