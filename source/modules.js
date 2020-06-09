@@ -88,3 +88,30 @@ export function keys(obj) {
 
     return Object.keys(obj);
 }
+
+/**
+ * From numeric value produces a random string of char and numbers of
+ * max length 15 in three different bases:
+ *      2 - The number will show as a binary value
+ *      8 - The number will show as an octal value
+ *      16 - The number will show as an hexadecimal value
+ *
+ * @param {Number} max - max length of value is 15, default max is 12
+ * @param {Number} redix - Base to use for representing a numeric value
+ * @return {String} - random string of char and numbers
+ */
+export function random(max, radix) {
+    radix = radix === 2 || radix === 8 || radix === 16 ? radix : 10;
+    max = max > 0 || max <= 15 ? parseInt(max) : 12;
+    return Math.random().toString(radix).substr(-max);
+}
+
+/**
+ * Calculate random integer between 0 and negative or positive Number.
+ * @param {Number} num - positive or negative
+ * @return {Integer} - Get random integer
+ */
+export function rand(num) {
+    var neg = num < 0 ? -1 : 1;
+    return neg * Math.floor(Math.random() * Math.floor(Math.abs(num)));
+}

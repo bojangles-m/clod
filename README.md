@@ -94,6 +94,25 @@ clod.first(obj); // length
 clod.first(arr); // undefined
 ```
 
+#### rand
+
+```js
+clod.rand(200); // 155
+clod.rand(-100); // -77
+clod.rand(-10); // -7
+```
+
+#### random
+
+```js
+clod.random(); // length 12:  392978968529
+clod.random(15); // max length: 755392978968529
+clod.random(6); // 968529
+clod.random(6, 2); // base 2: 110011
+clod.random(6, 8); // base 8: 532314
+clod.random(6, 16); // base 16: 13ad33
+```
+
 ## License
 
 [ISC](LICENSE.md)

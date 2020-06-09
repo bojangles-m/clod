@@ -8,3 +8,7 @@ Person = function (first, last) {
     };
 };
 Friend = new Person('Max', 'Muster');
+
+const mockMath = Object.create(global.Math);
+mockMath.random = () => 0.7755392978968529;
+global.Math = mockMath;
