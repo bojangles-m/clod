@@ -113,6 +113,44 @@ clod.random(6, 8); // base 8: 532314
 clod.random(6, 16); // base 16: 13ad33
 ```
 
+#### replaceAt
+
+```js
+// str = DRFAAAAAAAXYZAAAAAAAAMUN
+
+// Removes substring at different indexes
+clod.replaceAt(str, 3); // AAAAAAAXYZAAAAAAAAMUN
+clod.replaceAt(str, 3, 10); // DRFAAAAAAAAAAAAAAAMUN
+clod.replaceAt(str, 3, 21); // DRFAAAAAAAXYZAAAAAAAA
+
+// Replaces substring at different indexes
+clod.replaceAt(str, 3, 0, '---'); // ---AAAAAAAXYZAAAAAAAAMUN
+clod.replaceAt(str, 3, 10, '...'); // DRFAAAAAAA...AAAAAAAAMUN
+clod.replaceAt(str, 3, 21, '+++'); // DRFAAAAAAAXYZAAAAAAAA+++
+```
+
+#### rnd
+
+```js
+// Used all sets of characters
+clod.rnd(12); // J<^kl)OS+{Yv
+
+// Used only numbers
+clod.rnd(8, clod.rnd.num); // 84404908
+
+// Used only lower alpha
+clod.rnd(22, clod.rnd.alphaLower); // xkrjbluejcvtbuymuxzbjp
+
+// Used only upper alpha
+clod.rnd(18, clod.rnd.alphaUpper); // LRERONFKSEVBUFSCJR
+
+// Used only special characters
+clod.rnd(35, clod.rnd.special); // &;/{}?["/_[^^#^#_{$&=]&%_!?">=(.-.*
+
+// Used random input characters
+clod.rnd(17, [...'AB,0X-zM']); // ,B,,A,XMMMXMM,,X
+```
+
 ## License
 
 [ISC](LICENSE.md)

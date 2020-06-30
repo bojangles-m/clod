@@ -25,7 +25,8 @@
         "test": "yarn lint && yarn test:node",
         "test:node": "yarn prepare:tests && yarn test:only",
         "test:only": "jest",
-        "prepare:tests": "yarn build"
+        "prepare:tests": "yarn build",
+        "test:file": "jest test/params.test.js"
     },
     "devDependencies": {
         "babel-eslint": "^10.1.0",

@@ -1,4 +1,4 @@
-//  clod v0.2.0
+//  clod v0.2.1
 //  https://github.com/bojangles-m/clod
 //  (c) 2020-2020 Bojan Mazej
 //  License: ISC
@@ -15,6 +15,7 @@
     /**
      * Simple Dump function to write on output
      * Used for development
+     *
      * @param {*} obj printed out
      * @param {Boolean} _cdump - enable or disable output
      */
@@ -25,6 +26,7 @@
 
     /**
      * Checks if the input value is 'null' or 'undefined'.
+     *
      * @param {*} testing value
      * @return {Boolean} 'true' if 'value' is 'undefined' or 'null', otherwise 'false'.
      */
@@ -34,6 +36,7 @@
 
     /**
      * Is a given variable an object?
+     *
      * @param {*} obj - passed any var to make a check
      * @return {Boolean} 'true' if param is Object, otherwise 'false'.
      */
@@ -44,6 +47,7 @@
     /**
      * For a given array, string, or object we check if it is Empty.
      * An "empty" object has no enumerable own-properties.
+     *
      * @param {*} obj - param to be teste for
      * @return {Boolean} 'true' if param is Empty, otherwise 'false'.
      */
@@ -57,6 +61,7 @@
 
     /**
      * Internal function for string based Type testing.
+     *
      * @param {String} name - Type of the param
      * @returns {Boolean} 'true' if param is the Type passed to the function, otherwise 'false'.
      */
@@ -83,6 +88,7 @@
 
     /**
      * Return first key of the Object
+     *
      * @param {Object} obj - get the first key
      * @return {String} - Returns first property of the object, otherwise undefined
      */
@@ -94,6 +100,7 @@
 
     /**
      * Return Array of Object properties
+     *
      * @param {Object} obj - to get all properties from
      * @returns {Array} - array of Object properties
      */
@@ -105,23 +112,22 @@
 
     /**
      * From numeric value produces a random string of char and numbers of
-     * max length 15 in three different bases:
-     *      2 - The number will show as a binary value
-     *      8 - The number will show as an octal value
-     *      16 - The number will show as an hexadecimal value
+     * max length. Radix is between 2 and 36.
      *
      * @param {Number} max - max length of value is 15, default max is 12
      * @param {Number} redix - Base to use for representing a numeric value
      * @return {String} - random string of char and numbers
      */
     function random(max, radix) {
-        radix = radix === 2 || radix === 8 || radix === 16 ? radix : 10;
-        max = max > 0 || max <= 15 ? parseInt(max) : 12;
-        return Math.random().toString(radix).substr(-max);
+        max = max && (max > 0 || max <= 15) ? parseInt(max) : 12;
+        return Math.random()
+            .toString(radix || 10)
+            .substr(-max);
     }
 
     /**
      * Calculate random integer between 0 and negative or positive Number.
+     *
      * @param {Number} num - positive or negative
      * @return {Integer} - Get random integer
      */
@@ -129,6 +135,43 @@
         var neg = num < 0 ? -1 : 1;
         return neg * Math.floor(Math.random() * Math.floor(Math.abs(num)));
     }
+
+    /**
+     * Removes portion of string and replace it with a new string.
+     * Use it only if you need to replace substring between two indexes!!!
+     *
+     * @param {String} str - original string
+     * @param {Number} i - index from which part to remove the string
+     * @param {Number} k - length of removed substirng
+     * @param {String} r - replacement string
+     * @returns {String} - substring
+     */
+    function replaceAt(str, k = 0, i = 0, r = '') {
+        return [str.substring(0, i), r, str.substring(i + k)].join('');
+    }
+
+    /**
+     * Random srting of a certain size defined as parameter
+     *
+     * @param {Number} len - size of the string
+     * @param {Array} set - Set of the character a string can be formed from
+     * @returns {String}
+     */
+    const rnd = (() => {
+        const sets = {
+            num: [...`0123456789`],
+            alphaLower: [...`abcdefghijklmnopqrstuvwxyz`],
+            alphaUpper: [...`ABCDEFGHIJKLMNOPQRSTUVWXYZ`],
+            special: [...`~!@#$%^&*()_+-=[]\{}|'";:,./<>?`],
+        };
+
+        function* itr(len, set) {
+            if (set.length < 1) set = Object.values(sets).flat();
+            for (let i = 0; i < len; i++) yield set[(Math.random() * set.length) | 0];
+        }
+
+        return Object.assign((len, ...set) => [...itr(len, set.flat())].join(''), sets);
+    })();
 
     var clod = {
         __proto__: null,
@@ -149,7 +192,9 @@
         first: first,
         keys: keys,
         random: random,
-        rand: rand
+        rand: rand,
+        replaceAt: replaceAt,
+        rnd: rnd
     };
 
     return clod;

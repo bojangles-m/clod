@@ -43,3 +43,55 @@ describe('Parameter testing Functions like (isString, siObject, isNull ...)', ()
     }
     arg('a');
 });
+
+describe('Replace string with substring', () => {
+    test('Remove 3 chars from the beginning of the string', () => {
+        expect(clod.replaceAt(str, 3)).toBe('AAAAAAAXYZAAAAAAAAMUN');
+    });
+
+    test('Remove 3 chars from the middle of the string', () => {
+        expect(clod.replaceAt(str, 3, 10)).toBe('DRFAAAAAAAAAAAAAAAMUN');
+    });
+
+    test('Remove 3 chars from the end of the string', () => {
+        expect(clod.replaceAt(str, 3, 21)).toBe('DRFAAAAAAAXYZAAAAAAAA');
+    });
+
+    test('Replace 3 chars from the beginning of the string with: ---', () => {
+        expect(clod.replaceAt(str, 3, 0, '---')).toBe('---AAAAAAAXYZAAAAAAAAMUN');
+    });
+
+    test('Replace 3 chars from the middle of the string with: ...', () => {
+        expect(clod.replaceAt(str, 3, 10, '...')).toBe('DRFAAAAAAA...AAAAAAAAMUN');
+    });
+
+    test('Replace 3 chars from the end of the string with: +++', () => {
+        expect(clod.replaceAt(str, 3, 21, '+++')).toBe('DRFAAAAAAAXYZAAAAAAAA+++');
+    });
+});
+
+describe('Generate string with different sizes and characters', () => {
+    test('Random string size 12, all sets', () => {
+        expect(clod.rnd(12)).toBe('((((((((((((');
+    });
+
+    test('Random string size 8, out of numbers', () => {
+        expect(clod.rnd(8, clod.rnd.num)).toBe('77777777');
+    });
+
+    test('Random string size 22, out of alphaLower', () => {
+        expect(clod.rnd(22, clod.rnd.alphaLower)).toBe('uuuuuuuuuuuuuuuuuuuuuu');
+    });
+
+    test('Random string size 18, out of alphaUpper', () => {
+        expect(clod.rnd(18, clod.rnd.alphaUpper)).toBe('UUUUUUUUUUUUUUUUUU');
+    });
+
+    test('Random string size 43, out of special', () => {
+        expect(clod.rnd(35, clod.rnd.special)).toBe(':::::::::::::::::::::::::::::::::::');
+    });
+
+    test(`Random string size 17, out of chars 'AB,0X-zM' passed as param `, () => {
+        expect(clod.rnd(17, [...'AB,0X-zM'])).toBe('zzzzzzzzzzzzzzzzz');
+    });
+});
