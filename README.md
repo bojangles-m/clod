@@ -40,6 +40,8 @@ var Person = function (first, last) {
     };
 };
 var Friend = new Person('Max', 'Muster');
+
+var str = 'DRFAAAAAAAXYZAAAAAAAAMUN';
 ```
 
 #### isNil
@@ -149,6 +151,17 @@ clod.rnd(35, clod.rnd.special); // &;/{}?["/_[^^#^#_{$&=]&%_!?">=(.-.*
 
 // Used random input characters
 clod.rnd(17, [...'AB,0X-zM']); // ,B,,A,XMMMXMM,,X
+```
+
+#### merge
+
+```js
+// Merge two or more Objects into one
+clod.merge({}, 1); // {}
+clod.merge({ a: 1 }, 1); // { a: 1 }
+clod.merge({ a: 5 }, { b: 2 }); // { a: 5, b: 2 }
+clod.merge({ a: 5 }, { a: 1, b: 2 }, { b: 6, c: 4 }); // { a: 1, b: 6, c: 4 }
+clod.merge([{ a: 1 }, { a: 3 }]); // { 0: { a: 1 }, 1: { a: 3 } }
 ```
 
 ## License

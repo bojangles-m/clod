@@ -6,6 +6,9 @@
     "module": "clod.js",
     "author": "Bojan Mazej <bojan.mazej@gmail.com>",
     "license": "ISC",
+    "jest": {
+        "verbose": true
+    },
     "keywords": [
         "clod",
         "utils",
@@ -23,17 +26,17 @@
         "build:umd": "rollup -c -o clod.js",
         "build:umd:min": "rollup --config rollup.config.prod.js -o clod.min.js",
         "test": "yarn lint && yarn test:node",
-        "test:node": "yarn prepare:tests && yarn test:only",
+        "test:node": "yarn build && yarn test:only",
         "test:only": "jest",
-        "prepare:tests": "yarn build",
-        "test:file": "jest test/params.test.js"
+        "test:file": "jest test/misc.test.js",
+        "test:coverage": "jest --coverage"
     },
     "devDependencies": {
         "babel-eslint": "^10.1.0",
         "eslint": "^7.1.0",
+        "jest": "^26.0.1",
         "rollup": "^2.13.1",
-        "rollup-plugin-terser": "^6.1.0",
-        "jest": "^26.0.1"
+        "rollup-plugin-terser": "^6.1.0"
     },
     "repository": {
         "type": "git",

@@ -1,4 +1,4 @@
-//  clod v0.2.1
+//  clod v0.2.2
 //  https://github.com/bojangles-m/clod
 //  (c) 2020-2020 Bojan Mazej
 //  License: ISC
@@ -87,14 +87,13 @@
     var isArray = Array.isArray;
 
     /**
-     * Return first key of the Object
+     * Return first property of the Object
      *
      * @param {Object} obj - get the first key
      * @return {String} - Returns first property of the object, otherwise undefined
      */
     function first(obj) {
         if (!isObject(obj) || isEmpty(obj)) return undefined;
-
         return Object.keys(obj)[0];
     }
 
@@ -173,6 +172,17 @@
         return Object.assign((len, ...set) => [...itr(len, set.flat())].join(''), sets);
     })();
 
+    /**
+     * Merge - murge multiple object into one
+     * @params {Object} multiple numbers of object
+     * @returns Merged object
+     */
+    function merge() {
+        if (!isArguments(arguments) || isEmpty(arguments)) return {};
+
+        return Object.assign({}, ...arguments);
+    }
+
     var clod = {
         __proto__: null,
         isNil: isNil,
@@ -194,7 +204,8 @@
         random: random,
         rand: rand,
         replaceAt: replaceAt,
-        rnd: rnd
+        rnd: rnd,
+        merge: merge
     };
 
     return clod;

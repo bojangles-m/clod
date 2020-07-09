@@ -73,14 +73,13 @@ export var isUndefined = paramTester('Undefined');
 export var isArray = Array.isArray;
 
 /**
- * Return first key of the Object
+ * Return first property of the Object
  *
  * @param {Object} obj - get the first key
  * @return {String} - Returns first property of the object, otherwise undefined
  */
 export function first(obj) {
     if (!isObject(obj) || isEmpty(obj)) return undefined;
-
     return Object.keys(obj)[0];
 }
 
@@ -158,3 +157,14 @@ export const rnd = (() => {
 
     return Object.assign((len, ...set) => [...itr(len, set.flat())].join(''), sets);
 })();
+
+/**
+ * Merge - murge multiple object into one
+ * @params {Object} multiple numbers of object
+ * @returns Merged object
+ */
+export function merge() {
+    if (!isArguments(arguments) || isEmpty(arguments)) return {};
+
+    return Object.assign({}, ...arguments);
+}
