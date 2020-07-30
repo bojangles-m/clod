@@ -7,7 +7,7 @@
  */
 global._cdump = false;
 global.cdump = function dump(obj) {
-    if (_cdump) console.log(obj);
+  if (_cdump) console.log(obj);
 };
 
 /**
@@ -17,7 +17,7 @@ global.cdump = function dump(obj) {
  * @return {Boolean} 'true' if 'value' is 'undefined' or 'null', otherwise 'false'.
  */
 export function isNil(value) {
-    return value == null;
+  return value == null;
 }
 
 /**
@@ -27,7 +27,7 @@ export function isNil(value) {
  * @return {Boolean} 'true' if param is Object, otherwise 'false'.
  */
 export function isObject(obj) {
-    return (typeof obj === 'function' || paramTester('Object')(obj)) && !!obj;
+  return (typeof obj === 'function' || paramTester('Object')(obj)) && !!obj;
 }
 
 /**
@@ -38,11 +38,12 @@ export function isObject(obj) {
  * @return {Boolean} 'true' if param is Empty, otherwise 'false'.
  */
 export function isEmpty(obj) {
-    if (obj == null) return true;
+  if (obj == null) return true;
 
-    if (isArray(obj) || isString(obj) || isArguments(obj)) return obj.length === 0;
+  if (isArray(obj) || isString(obj) || isArguments(obj))
+    return obj.length === 0;
 
-    return Object.keys(obj).length === 0;
+  return Object.keys(obj).length === 0;
 }
 
 /**
@@ -52,9 +53,9 @@ export function isEmpty(obj) {
  * @returns {Boolean} 'true' if param is the Type passed to the function, otherwise 'false'.
  */
 function paramTester(name) {
-    return function (obj) {
-        return toString.call(obj) === `[object ${name}]`;
-    };
+  return function (obj) {
+    return toString.call(obj) === `[object ${name}]`;
+  };
 }
 
 /**
@@ -79,8 +80,8 @@ export var isArray = Array.isArray;
  * @return {String} - Returns first property of the object, otherwise undefined
  */
 export function first(obj) {
-    if (!isObject(obj) || isEmpty(obj)) return undefined;
-    return Object.keys(obj)[0];
+  if (!isObject(obj) || isEmpty(obj)) return undefined;
+  return Object.keys(obj)[0];
 }
 
 /**
@@ -90,9 +91,9 @@ export function first(obj) {
  * @returns {Array} - array of Object properties
  */
 export function keys(obj) {
-    if (!isObject(obj)) return [];
+  if (!isObject(obj)) return [];
 
-    return Object.keys(obj);
+  return Object.keys(obj);
 }
 
 /**
@@ -104,10 +105,10 @@ export function keys(obj) {
  * @return {String} - random string of char and numbers
  */
 export function random(max, radix) {
-    max = max && (max > 0 || max <= 15) ? parseInt(max) : 12;
-    return Math.random()
-        .toString(radix || 10)
-        .substr(-max);
+  max = max && (max > 0 || max <= 15) ? parseInt(max) : 12;
+  return Math.random()
+    .toString(radix || 10)
+    .substr(-max);
 }
 
 /**
@@ -117,8 +118,8 @@ export function random(max, radix) {
  * @return {Integer} - Get random integer
  */
 export function rand(num) {
-    var neg = num < 0 ? -1 : 1;
-    return neg * Math.floor(Math.random() * Math.floor(Math.abs(num)));
+  var neg = num < 0 ? -1 : 1;
+  return neg * Math.floor(Math.random() * Math.floor(Math.abs(num)));
 }
 
 /**
@@ -132,7 +133,7 @@ export function rand(num) {
  * @returns {String} - substring
  */
 export function replaceAt(str, k = 0, i = 0, r = '') {
-    return [str.substring(0, i), r, str.substring(i + k)].join('');
+  return [str.substring(0, i), r, str.substring(i + k)].join('');
 }
 
 /**
@@ -143,19 +144,22 @@ export function replaceAt(str, k = 0, i = 0, r = '') {
  * @returns {String}
  */
 export const rnd = (() => {
-    const sets = {
-        num: [...`0123456789`],
-        alphaLower: [...`abcdefghijklmnopqrstuvwxyz`],
-        alphaUpper: [...`ABCDEFGHIJKLMNOPQRSTUVWXYZ`],
-        special: [...`~!@#$%^&*()_+-=[]\{}|'";:,./<>?`],
-    };
+  const sets = {
+    num: [...`0123456789`],
+    alphaLower: [...`abcdefghijklmnopqrstuvwxyz`],
+    alphaUpper: [...`ABCDEFGHIJKLMNOPQRSTUVWXYZ`],
+    special: [...`~!@#$%^&*()_+-=[]\{}|'";:,./<>?`],
+  };
 
-    function* itr(len, set) {
-        if (set.length < 1) set = Object.values(sets).flat();
-        for (let i = 0; i < len; i++) yield set[(Math.random() * set.length) | 0];
-    }
+  function* itr(len, set) {
+    if (set.length < 1) set = Object.values(sets).flat();
+    for (let i = 0; i < len; i++) yield set[(Math.random() * set.length) | 0];
+  }
 
-    return Object.assign((len, ...set) => [...itr(len, set.flat())].join(''), sets);
+  return Object.assign(
+    (len, ...set) => [...itr(len, set.flat())].join(''),
+    sets,
+  );
 })();
 
 /**
@@ -164,7 +168,18 @@ export const rnd = (() => {
  * @returns Merged object
  */
 export function merge() {
-    if (!isArguments(arguments) || isEmpty(arguments)) return {};
+  if (!isArguments(arguments) || isEmpty(arguments)) return {};
 
-    return Object.assign({}, ...arguments);
+  return Object.assign({}, ...arguments);
+}
+
+/**
+ * Capitalize string
+ * Only First letter or every Word in the string
+ * @param {String} str - string to Capitalize
+ * @param {Boolean} all - First leter or every first letter of the word in the string
+ */
+export function cap(str, all = false) {
+  const one = s => s.replace(/^./, s[0].toUpperCase());
+  return all ? str.split(' ').map(one).join(' ') : one(str);
 }

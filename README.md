@@ -30,18 +30,25 @@ import clod from 'clod';
 Variables used in the examples.
 
 ```js
-var obj = { length: 0, b: 2 };
+var obj = {length: 0, b: 2};
 var arr = [1, 2, 3, 4];
 
 var Person = function (first, last) {
-    this.name = {
-        first: first,
-        last: last,
-    };
+  this.name = {
+    first: first,
+    last: last,
+  };
 };
 var Friend = new Person('Max', 'Muster');
 
 var str = 'DRFAAAAAAAXYZAAAAAAAAMUN';
+```
+
+#### cap
+
+```js
+clod.cap('only first letter or'); // Only first letter or
+clod.cap('or every word', true); // Or Every Word
 ```
 
 #### isNil
@@ -158,10 +165,10 @@ clod.rnd(17, [...'AB,0X-zM']); // ,B,,A,XMMMXMM,,X
 ```js
 // Merge two or more Objects into one
 clod.merge({}, 1); // {}
-clod.merge({ a: 1 }, 1); // { a: 1 }
-clod.merge({ a: 5 }, { b: 2 }); // { a: 5, b: 2 }
-clod.merge({ a: 5 }, { a: 1, b: 2 }, { b: 6, c: 4 }); // { a: 1, b: 6, c: 4 }
-clod.merge([{ a: 1 }, { a: 3 }]); // { 0: { a: 1 }, 1: { a: 3 } }
+clod.merge({a: 1}, 1); // { a: 1 }
+clod.merge({a: 5}, {b: 2}); // { a: 5, b: 2 }
+clod.merge({a: 5}, {a: 1, b: 2}, {b: 6, c: 4}); // { a: 1, b: 6, c: 4 }
+clod.merge([{a: 1}, {a: 3}]); // { 0: { a: 1 }, 1: { a: 3 } }
 ```
 
 ## License
